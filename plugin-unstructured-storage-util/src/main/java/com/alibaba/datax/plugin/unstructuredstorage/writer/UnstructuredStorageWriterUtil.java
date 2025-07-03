@@ -310,6 +310,8 @@ public class UnstructuredStorageWriterUtil {
                     if (null != column.getRawData()) {
                         boolean isDateColumn = column instanceof DateColumn;
                         if (!isDateColumn) {
+                            String tmpstr=StringUtils.replacePattern(column.asString(),  "\\r\\n|\\n|\\r|\\u0001",  " ");
+                            splitedRows.add(tmpstr);
                             if (column instanceof BytesColumn) {
                                 if ("base64".equalsIgnoreCase(byteEncoding)) {
                                     splitedRows.add(Base64.encodeBase64String(column.asBytes()));
